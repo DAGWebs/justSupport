@@ -1,0 +1,263 @@
+$(document).ready(
+    $("#username").on('keyup click', () => {
+        var password = $("#username");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            password.addClass('text-danger is-invalid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("Username is a required field!").show();
+            disablebtn();
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(password.val().length < 6) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("Username requires at least 6 characters!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+    $("#email").on('keyup click', () => {
+        var password = $("#email");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The email field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(!validateEmail(password.val())) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("A valid email is required!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+    $("#fname").on('keyup click', () => {
+        var password = $("#fname");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The first name field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(password.val().length < 2) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("The first name requires at least 2 characters!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+    $("#lname").on('keyup click', () => {
+        var password = $("#lname");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The last name field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(password.val().length < 2) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("The last name requires at least 2 characters!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+    $("#discord").on('keyup click', () => {
+        var password = $("#discord");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The discord field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(!validateDiscord(password.val())){
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("Please enter a valid discord!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+    $("#password").on('keyup click', () => {
+        var password = $("#password");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The password field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+        }
+    }),
+    $("#cpassword").on('keyup click', () => {
+        var password = $("#cpassword");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The confirm password field is required!").show();
+            disablebtn();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtn(false);
+            password.addClass('text-success is-valid');
+
+            if(password.val() !== $('#password').val()) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("Your passwords dont Match!").show();
+                disablebtn();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtn(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+
+    $('#regBTN').on('click', (e) => {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "/userApi",
+            data: {
+                username: $('#username').val(),
+                email: $('#email').val(),
+                lname: $('#lname').val(),
+                fname: $('#fname').val(),
+                discord: $('#discord').val(),
+                password: $('#password').val()
+            },
+            dataType: "JSON",
+            success: function (res) {
+                console.log(res.msg);
+                if(res.msg === "success") {
+                    window.location.replace("/login");
+                } else if(res.msg === 'email in use') {
+                    $(".form-errors").addClass('alert alert-danger text-center').html("The email you selected is already in use!").show();
+                    disablebtn();
+                } else if(res.msg === 'username in use') {
+                    $(".form-errors").addClass('alert alert-danger text-center').html("The username you selected is already in use!").show();
+                    disablebtn();
+                } else if(res.msg === 'discord in use') {
+                    $(".form-errors").addClass('alert alert-danger text-center').html("The discord you selected is already in use!").show();
+                    disablebtn();
+                } else {
+                    $(".form-errors").addClass('alert alert-danger text-center').html("An unknown error has accured!").show();
+                    disablebtn();
+                }
+            },
+            failure: function (res){
+                $(".form-errors").addClass('alert alert-danger text-center').html("Something went wrong please refresh the page and try again!").show();
+            }
+        });
+    })
+
+    
+);
+
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function validateDiscord(discord) {
+    const re = /^((.{2,32})#\d{4})/;
+    return re.test(String(discord).toLowerCase());
+}
+
+function disablebtn(cond = true) {
+    if(cond) {
+       return $('#regBTN').attr('disabled', true);
+    } else {
+        $('#regBTN').attr('disabled', false);
+    }
+}
