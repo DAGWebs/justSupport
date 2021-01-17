@@ -239,8 +239,153 @@ $(document).ready(
                 $(".form-errors").addClass('alert alert-danger text-center').html("Something went wrong please refresh the page and try again!").show();
             }
         });
-    })
+    }),
 
+    $("#logusername").on('keyup click', () => {
+        var password = $("#logusername");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("Username Discord or Email is required!").show();
+            disablebtnlogin();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtnlogin(false);
+            password.addClass('text-success is-valid');
+        }
+    }),
+
+    $("#logpassword").on('keyup click', () => {
+        var password = $("#logpassword");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The password field is required!").show();
+            disablebtnlogin();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtnlogin(false);
+            password.addClass('text-success is-valid');
+        }
+    }),
+
+    $("#logBTN").on('click', (e) => {
+        e.preventDefault();
+        var username = $("#logusername").val();
+        var password = $("#logpassword").val();
+        $.ajax({
+            type: "post",
+            url: "/userApi/" + username,
+            data: {
+                username: username,
+                password: password
+            },
+            dataType: "JSON",
+            success: function (res) {
+                console.log(res.msg);
+                if(res.msg === "success") {
+                    window.location.replace("/login");
+                } else if(res.msg === 'bad creds') {
+                    $(".form-errors").addClass('alert alert-danger text-center').html("Your credintials are inccorect!").show();
+                    disablebtn();
+                } else if(res.msg === 'validation incomplete') {
+                    $(".form-errors").addClass('alert alert-danger text-center').html(`Hello, ${res.name} your email has not been validated yet!`).show();
+                    disablebtn();
+                } else if(res.msg === 'login done') {
+                    window.location.replace("/dashboard");
+                }
+            },
+            failure: function (res){
+                $(".form-errors").addClass('alert alert-danger text-center').html("Something went wrong please refresh the page and try again!").show();
+            }
+        });
+    }),
+
+    $("#resetusername").on('keyup click', () => {
+        var password = $("#resetusername");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The username field is required!").show();
+            disablebtnloginReset();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtnloginReset(false);
+            password.addClass('text-success is-valid');
+        }
+    }),
+
+    $("#resetemail").on('keyup click', () => {
+        var password = $("#resetemail");
+
+        if(password.val() === '') {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").addClass('alert alert-danger text-center').html("The email field is required!").show();
+            disablebtnloginReset();
+            password.addClass('text-danger is-invalid');
+        } else {
+            password.removeClass('text-danger is-invalid');
+            password.removeClass('text-success is-valid');
+            $(".form-errors").html("").hide();
+            disablebtnloginReset(false);
+            password.addClass('text-success is-valid');
+            if(!validateEmail(password.val())) {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").addClass('alert alert-danger text-center').html("A valid email is required!").show();
+                disablebtnloginReset();
+                password.addClass('text-danger is-invalid');
+            } else {
+                password.removeClass('text-danger is-invalid');
+                password.removeClass('text-success is-valid');
+                $(".form-errors").html("").hide();
+                disablebtnloginReset(false);
+                password.addClass('text-success is-valid');
+            }
+        }
+    }),
+
+    $("#resetBTN").on('click', (e) => {
+        e.preventDefault();
+        var username = $("#resetusername").val();
+        var email = $("#resetemail").val();
+        $.ajax({
+            type: "get",
+            url: "/userApi/" + username,
+            data: {
+                username: username,
+                email: email
+            },
+            dataType: "JSON",
+            success: function (res) {
+                console.log(res.msg);
+                if(res.msg === "return") {
+                    $(".form-errors").removeClass('alert alert-danger');
+                    $(".form-errors").addClass('alert alert-success text-center').html("If your email and password exist an email will be sent to you!").show();
+                }  else if(res.msg === "email sent") {
+                    $(".form-errors").removeClass('alert alert-danger');
+                    $(".form-errors").hide();
+                    $(".form-errors").addClass('alert alert-danger text-center').html("An email has already been sent to you! Please wait to request another one.").show();
+                }
+            },
+            failure: function (res){
+                $(".form-errors").addClass('alert alert-danger text-center').html("Something went wrong please refresh the page and try again!").show();
+            }
+        });
+    })
     
 );
 
@@ -259,5 +404,21 @@ function disablebtn(cond = true) {
        return $('#regBTN').attr('disabled', true);
     } else {
         $('#regBTN').attr('disabled', false);
+    }
+}
+
+function disablebtnlogin(cond = true) {
+    if(cond) {
+       return $('#logBTN').attr('disabled', true);
+    } else {
+        $('#logBTN').attr('disabled', false);
+    }
+}
+
+function disablebtnloginReset(cond = true) {
+    if(cond) {
+       return $('#resetBTN').attr('disabled', true);
+    } else {
+        $('#resetBTN').attr('disabled', false);
     }
 }

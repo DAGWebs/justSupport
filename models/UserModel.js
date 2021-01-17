@@ -42,6 +42,14 @@ var userSchema = new Schema({
     isLoggedin: {
         type: Boolean,
         default: false
+    },
+    profilePic: {
+        type: String,
+        default: "img/default/profile/default.jpg"
+    },
+    sentEmail: {
+        type: Boolean,
+        default: true
     }
 },{timestamps: true});
 

@@ -1,5 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@900&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     background-color: #222;
+    overflow-x: hidden;
+}
+
+.text-right {
+    float: right;
+}
+
+.reg-form {
+    padding: 26px;
+    margin-top: 65px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 7px 7px 7px black;
+}
+
+form input {
+    padding: 15px;
+}
+
+form h1 {
+    font-family: 'Catamaran', sans-serif; 
 }

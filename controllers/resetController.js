@@ -1,10 +1,10 @@
 const config = require('../configuration/config');
 const configuration = require('../configuration/config');
 
-exports.getLogin = (req, res, next) => {
+exports.getReset = (req, res, next) => {
     
     var payload = {
-        pageTitle: "Login",
+        pageTitle: "Reset Password",
         appName: configuration.appName,
         appTheme: configuration.appTheme
     }
@@ -12,6 +12,6 @@ exports.getLogin = (req, res, next) => {
     if(req.session && req.session.user) {
         return res.redirect('/dashboard');
     } else {
-        res.status(200).render("auth/login", payload);
+        res.status(200).render("auth/reset", payload);
     }
 }

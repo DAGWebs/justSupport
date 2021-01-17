@@ -29,6 +29,12 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "public/assets")));
 
+app.use(session({
+    secret: "jsdfghohg5643298324erofduhg",
+    resave: true,
+    saveUninitialized: false
+}))
+
 const server = app.listen(config.sitePort, config.serverAddress, () => {
     if(config.DeveloperMode) {
         console.log("--------------------------------------------------------------------------------------------------------------------------".brightYellow);
@@ -52,12 +58,14 @@ const server = app.listen(config.sitePort, config.serverAddress, () => {
 //set Routes
 const loginRoute = require('./routes/loginRoute');
 const registerRoute = require('./routes/registerRoute');
+const resetRoute = require('./routes/resetRoute');
 
 const userApiRoute = require('./api/v1/users/userApi');
 // Get Routes
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+app.use("/reset", resetRoute);
 // Get API Routes
 
 app.use("/userApi", userApiRoute);
